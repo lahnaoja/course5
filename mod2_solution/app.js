@@ -23,6 +23,12 @@
         toBuy.addItem = function() {
             ShoppingListCheckOffService.addItem(toBuy.itemName, toBuy.itemQuantity);
         }
+        toBuy.isEmpty = function() {
+          var ret = true;
+          ret = (toBuy.items.length == 0 ? true : false);
+          console.log(ret);
+          return ret;
+        }
     }
 
     AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
@@ -56,6 +62,7 @@
         var boughtItems = [];
 
         service.bought = function( itemIndex) {
+          var item = toBuyItems[itemIndex];
             var item = {
                 name: itemName,
                 quantity: quantity

@@ -34,11 +34,11 @@
      <ul>
        <li ng-repeat="item in toBuy.items">
          Buy {{ item.quantity }} {{ item.name }}
-         <button ng-click="toBuy.removeItem($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
+         <button ng-click="toBuy.bought($index);" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button>
        </li>
        <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
      </ul>
-     <div class="emptyMessage">Everything is bought!</div>
+     <div ng-if="toBuy.isEmpty();" class="emptyMessage">Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
