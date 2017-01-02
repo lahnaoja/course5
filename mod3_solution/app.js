@@ -47,19 +47,23 @@
     function NarrowItDownController(MenuSearchService) {
         var narrowCtrl = this;
 
+        narrowCtrl.found = [];
         narrowCtrl.title = "Title";
         narrowCtrl.searchTerm = "";
         //narrowCtrl.found = MenuSearchService.getMatchedMenuItems(narrowCtrl.searchTerm);
-        narrowCtrl.found = MenuSearchService.getfoundItems();
+        //narrowCtrl.found = MenuSearchService.getfoundItems();
+        narrowCtrl.narrowDown = function() {
+          console.log(narrowCtrl.searchTerm);
+          narrowCtrl.found = MenuSearchService.getMatchedMenuItems(narrowCtrl.searchTerm);
+        };
 
         narrowCtrl.removeItem = function(index) {
-            MenuSearchService.removeItem(itemIndex);
+          MenuSearchService.removeItem(index);
         };
     }
 
 
     MenuSearchService.$inject = ['$q', '$http', 'ApiBasePath'];
-
     function MenuSearchService($q, $http, ApiBasePath) {
         //
         // The URL for the REST Endpoint is https://davids-restaurant.herokuapp.com/menu_items.json
@@ -78,8 +82,10 @@
                 // process result and only keep items that match
                 var foundItems = result.data;
 
+                console.log(foundItems.menu_items);
+
                 // return processed items
-                return foundItems;
+                return foundItems.menu_items;
             });
         };
 
