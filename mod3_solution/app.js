@@ -49,8 +49,8 @@
 
         narrowCtrl.title = "Title";
         narrowCtrl.searchTerm = "";
-
-        narrowCtrl.found = MenuSearchService.getMatchedMenuItems(narrowCtrl.searchTerm);
+        //narrowCtrl.found = MenuSearchService.getMatchedMenuItems(narrowCtrl.searchTerm);
+        narrowCtrl.found = MenuSearchService.getfoundItems();
 
         narrowCtrl.removeItem = function(index) {
             MenuSearchService.removeItem(itemIndex);
