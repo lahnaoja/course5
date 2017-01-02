@@ -6,51 +6,88 @@
 
     */
 
-    angular.module('ShoppingListCheckOff', [])
-        .controller('ToBuyController', ToBuyController)
-        .controller('AlreadyBoughtController', AlreadyBoughtController)
-        .service('ShoppingListCheckOffService', ShoppingListService);
+    angular.module('NarrowItDownApp', [])
+        .controller('NarrowItDownController', NarrowItDownController)
+        .service('MenuSearchService', MenuSearchService)
+        .directive('foundItems', FoundItemsDirective)
+        .constant('ApiBasePath', "http://davids-restaurant.herokuapp.com");
 
-    ToBuyController.$inject = ['ShoppingListCheckOffService'];
+    function FoundItemsDirective() {
+        var ddo = {
+            templateUrl: 'foundItems.html',
+            scope: {
+                found: '<',
+                myTitle: '@title',
+                onRemove: '&'
+            },
+            controller: FoundItemsDirectiveController,
+            controllerAs: 'list',
+            bindToController: true
+        };
 
-    function ToBuyController(ShoppingListCheckOffService) {
-        var toBuy = this;
+        return ddo;
+    }
 
-        toBuy.items = ShoppingListCheckOffService.getToBuyItems();
+    function FoundItemsDirectiveController() {
+        var list = this;
 
-        toBuy.bought = function(index) {
-            ShoppingListCheckOffService.bought(index);
-        }
-        toBuy.isEmpty = function() {
-            return (toBuy.items.length == 0 ? true : false);
-        }
+        list.cookiesInList = function() {
+            for (var i = 0; i < list.items.length; i++) {
+                var name = list.items[i].name;
+                if (name.toLowerCase().indexOf("cookie") !== -1) {
+                    return true;
+                }
+            }
+            return false;
+        };
+    }
+
+    NarrowItDownController.$inject = ['MenuSearchService'];
+
+    function NarrowItDownController(MenuSearchService) {
+        var narrowCtrl = this;
+
+        narrowCtrl.title = "Title";
+        narrowCtrl.searchTerm = "";
+
+        narrowCtrl.found = MenuSearchService.getMatchedMenuItems(narrowCtrl.searchTerm);
+
+        narrowCtrl.removeItem = function(index) {
+            MenuSearchService.removeItem(itemIndex);
+        };
     }
 
 
+    MenuSearchService.$inject = ['$q', '$http', 'ApiBasePath'];
 
-    function ShoppingListService() {
-      //
-      // The URL for the REST Endpoint is https://davids-restaurant.herokuapp.com/menu_items.json
-      //
+    function MenuSearchService($q, $http, ApiBasePath) {
+        //
+        // The URL for the REST Endpoint is https://davids-restaurant.herokuapp.com/menu_items.json
+        //
         var service = this;
 
-
         // List of bought items
-        var boughtItems = [];
+        var foundItems = [];
 
-        service.bought = function(itemIndex) {
-            var item = toBuyItems[itemIndex];
-            boughtItems.push(item);
-            service.removeItem(itemIndex);
+        // getMatchedMenuItems(searchTerm)
+        service.getMatchedMenuItems = function(searchTerm) {
+            return $http({
+                method: "GET",
+                url: (ApiBasePath + "/menu_items.json")
+            }).then(function(result) {
+                // process result and only keep items that match
+                var foundItems = result.data;
+
+                // return processed items
+                return foundItems;
+            });
         };
+
         service.removeItem = function(itemIdex) {
-            toBuyItems.splice(itemIdex, 1);
+            foundItems.splice(itemIdex, 1);
         };
-        service.getToBuyItems = function() {
-            return toBuyItems;
-        };
-        service.getBoughtItems = function() {
-            return boughtItems;
+        service.getfoundItems = function() {
+            return foundItems;
         };
     }
 
