@@ -1,3 +1,13 @@
+
+div.row {
+  padding: 5px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
 h1 {
   margin-bottom: 30px;
 }

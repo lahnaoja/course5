@@ -1,7 +1,23 @@
-<h3>Title: {{ list.myTitle }}</h3>
-<ol>
-  <li ng-repeat="item in list.found">
-    {{ item.name }}, {{ item.short_name }}, {{ item.description }}
-    <button ng-click="list.onRemove({index: $index});">Don't want this one!</button>
-  </li>
-</ol>
+
+<div class="container">
+  <div ng-repeat="item in list.found" class="row">
+    <div class="col-md-4">
+      {{ item.name }}
+    </div>
+    <div class="col-md-1">
+      {{ item.short_name }}
+    </div>
+    <div class="col-md-5">
+      {{ item.description }}
+    </div>
+    <div class="col-md-2">
+      <button ng-click="list.onRemove({index: $index});">
+        Don't want this one!
+      </button>
+    </div>
+    <div class="col-md-12">
+      <hr>
+    </div>
+  </div>
+  <div class="error" ng-if="list.listEmpty();">Nothing found</div>
+</div>
