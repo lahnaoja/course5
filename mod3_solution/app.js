@@ -2,8 +2,8 @@
     'use strict';
 
     /*
+    Instructions :
     https://github.com/jhu-ep-coursera/fullstack-course5/blob/master/assignments/assignment3/Assignment-3.md
-
     */
 
     angular.module('NarrowItDownApp', [])
@@ -12,13 +12,13 @@
         .directive('foundItems', FoundItemsDirective)
         .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com");
 
+    // Directive
     function FoundItemsDirective() {
         var ddo = {
             templateUrl: 'foundItems.html',
             scope: {
-                found: '<',
+                foundItemsList: '<',
                 buttonPressed: '<',
-                myTitle: '@title',
                 onRemove: '&'
             },
             controller: FoundItemsDirectiveController,
@@ -32,36 +32,37 @@
     function FoundItemsDirectiveController() {
         var list = this;
 
+        // Return true if the list is empty - only after the button is pressed
         list.listEmpty = function() {
             var ret = false;
-            if( list.buttonPressed ) {
-              if( list.found.length == 0 ) {
-                ret = true;
-              }
+            if (list.buttonPressed) {
+                if (list.foundItemsList.length == 0) {
+                    ret = true;
+                }
             }
             return ret;
         };
     }
+
 
     NarrowItDownController.$inject = ['MenuSearchService'];
     function NarrowItDownController(MenuSearchService) {
         var narrow = this;
 
         narrow.buttonPressed = false;
-        narrow.found = MenuSearchService.getfoundItems();
-
-        narrow.title = "Title";
+        narrow.foundItems = MenuSearchService.getfoundItems();
         narrow.searchTerm = "";
 
         narrow.narrowDown = function() {
-          MenuSearchService.getMatchedMenuItems(narrow.searchTerm);
-          narrow.buttonPressed = true;
+            MenuSearchService.getMatchedMenuItems(narrow.searchTerm);
+            narrow.buttonPressed = true;
         };
 
         narrow.removeItem = function(index) {
-          MenuSearchService.removeItem(index);
+            MenuSearchService.removeItem(index);
         };
     }
+
 
     MenuSearchService.$inject = ['$http', 'ApiBasePath'];
     function MenuSearchService($http, ApiBasePath) {
@@ -71,30 +72,30 @@
 
         service.getMatchedMenuItems = function(searchTerm) {
             // First, do empty the old list of items
-            while(items.length > 0) {
-              items.pop();
+            while (items.length > 0) {
+                items.pop();
             }
 
             $http({
                 method: "GET",
                 url: (ApiBasePath + "/menu_items.json")
             }).then(function(result) {
-              // process result and only keep items that match
-              var foundItems = result.data.menu_items;
-              for(var i = 0; i < foundItems.length; i++) {
-                var item = foundItems[i];
-                if (item["description"].toLowerCase().indexOf( searchTerm ) > -1) {
-                  items.push(item);
+                // process result and only keep items that match
+                var foundItems = result.data.menu_items;
+                for (var i = 0; i < foundItems.length; i++) {
+                    var item = foundItems[i];
+                    if (item["description"].toLowerCase().indexOf(searchTerm) > -1) {
+                        items.push(item);
+                    }
                 }
-              }
-              //console.log(foundItems.menu_items);
-            }, function (errorResponse) {
-              console.log(errorResponse.message);
+                //console.log(foundItems.menu_items);
+            }, function(errorResponse) {
+                console.log(errorResponse.message);
             });
         };
 
         service.removeItem = function(index) {
-          items.splice(index, 1);
+            items.splice(index, 1);
         };
         service.getfoundItems = function() {
             return items;
