@@ -1,4 +1,19 @@
 
+Task:
+https://github.com/jhu-ep-coursera/fullstack-course5/blob/master/assignments/assignment4/Assignment-4.md
+
+-Restaurant
+-CaegoryList
+
+
+----
+
+ShoppingList --> Restaurant
+
+shopinglist --> menulist   :component
+
+
+----
 
 Categories
 https://davids-restaurant.herokuapp.com/categories.json
