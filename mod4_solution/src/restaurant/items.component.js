@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('Restaurant')
-.component('categoryList', {
+.component('items', {
   templateUrl: 'src/shoppinglist/templates/categorylist.template.html',
   bindings: {
     items: '<'
