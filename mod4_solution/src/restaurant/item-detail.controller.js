@@ -1,3 +1,5 @@
+
+/*
 (function () {
 'use strict';
 
@@ -14,3 +16,4 @@ function ItemDetailController(item) {
 }
 
 })();
+*/

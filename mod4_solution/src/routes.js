@@ -16,32 +16,29 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   // Home page
   .state('home', {
     url: '/',
-    templateUrl: 'src/shoppinglist/templates/home.template.html'
+    templateUrl: 'src/restaurant/templates/home.template.html'
   })
 
   // Premade list page
   .state('categories', {
-    url: '/main-list',
-    templateUrl: 'src/shoppinglist/templates/main-shoppinglist.template.html',
-    controller: 'MainShoppingListController as mainList',
+    url: '/categories',
+    templateUrl: 'src/restaurant/templates/categorylist.template.html',
+    controller: 'CategoriesComponentController as cat',
     resolve: {
-      items: ['ShoppingListService', function (ShoppingListService) {
-        return ShoppingListService.getItems();
+      cats: ['MenuDataService', function (MenuDataService) {
+        return MenuDataService.getAllCategories();
       }]
     }
   })
 
   .state('items', {
-    url: '/item-detail/{itemId}',
-    templateUrl: 'src/shoppinglist/templates/item-detail.template.html',
-    controller: 'ItemDetailController as itemDetail',
+    url: '/items/{itemId}',
+    templateUrl: 'src/restaurant/templates/items.template.html',
+    controller: 'ItemsComponentController as itemsCtrl',
     resolve: {
-      item: ['$stateParams', 'ShoppingListService',
-            function ($stateParams, ShoppingListService) {
-              return ShoppingListService.getItems()
-                .then(function (items) {
-                  return items[$stateParams.itemId];
-                });
+      items: ['$stateParams', 'MenuDataService',
+            function ($stateParams, MenuDataService) {
+              return MenuDataService.getItemsForCategory($stateParams.itemId);
             }]
     }
   });

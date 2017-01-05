@@ -6,8 +6,20 @@ angular.module('data')
 
 
 MenuDataService.$inject = ['$q', '$timeout']
-function ShoppingListService($q, $timeout) {
+function MenuDataService($q, $timeout) {
   var service = this;
+
+  var cats = [];
+  cats.push({
+    id:81,
+    short_name:"L",
+    name:"Lunch",
+    special_instructions:"Sunday-Friday 11:15am-3:00pm. Served with your choice of rice",
+    url:"https://davids-restaurant.herokuapp.com/categories/81.json"
+  });
+
+
+
 
   // List of shopping items
   var items = [];
@@ -29,9 +41,21 @@ function ShoppingListService($q, $timeout) {
     description: "Put these in the dough. No reason, really. Gotta store them somewhere!"
   });
 
-  // Simulates call to server
-  // Returns a promise, NOT items array directly
-  service.getItems = function () {
+  // getAllCategories
+  service.getAllCategories = function () {
+    var deferred = $q.defer();
+
+    // Wait 2 seconds before returning
+    $timeout(function () {
+      // deferred.reject(items);
+      deferred.resolve(cats);
+    }, 800);
+
+    return deferred.promise;
+  };
+
+  // getItemsForCategory(categoryShortName)
+  service.getItemsForCategory = function (categoryShortName) {
     var deferred = $q.defer();
 
     // Wait 2 seconds before returning
@@ -42,6 +66,7 @@ function ShoppingListService($q, $timeout) {
 
     return deferred.promise;
   };
+
 }
 
 })();
