@@ -4,11 +4,11 @@
 angular.module('MenuApp')
 .controller('ItemsComponentController', ItemsComponentController);
 
-
-ItemsComponentController.$inject = ['items'];
-function ItemsComponentController(items) {
+ItemsComponentController.$inject = ['items', 'params'];
+function ItemsComponentController(items, params) {
   var itemsCtrl = this;
-  itemsCtrl.items = items;
+  itemsCtrl.items = items.data.menu_items;
+  itemsCtrl.short_name = params.itemId;
 }
 
 })();

@@ -7,7 +7,7 @@ angular.module('MenuApp')
 CategoriesComponentController.$inject = ['cats'];
 function CategoriesComponentController(cats) {
   var cat = this;
-  cat.cats = cats;
+  cat.cats = cats.data;
 }
 
 })();
