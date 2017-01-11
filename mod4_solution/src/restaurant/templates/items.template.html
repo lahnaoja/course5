@@ -2,8 +2,14 @@
 <a ui-sref="categories">Categories</a> &lt;
 <a ui-sref="items({itemId: itemsCtrl.short_name})">Items for category {{itemsCtrl.short_name}}</a>
 
+<items
+  items="itemsCtrl.items">
+</items>
+
+<!--
 <ul>
   <li ng-repeat="item in itemsCtrl.items">
     {{ item.id }} {{ item.short_name }} {{ item.name }}
   </li>
 </ul>
+-->

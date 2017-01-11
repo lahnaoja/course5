@@ -2,10 +2,10 @@
 'use strict';
 
 angular.module('MenuApp')
-.controller('CategoriesComponentController', CategoriesComponentController);
+.controller('CategoriesController', CategoriesController);
 
-CategoriesComponentController.$inject = ['cats'];
-function CategoriesComponentController(cats) {
+CategoriesController.$inject = ['cats'];
+function CategoriesController(cats) {
   var cat = this;
   cat.cats = cats.data;
 }

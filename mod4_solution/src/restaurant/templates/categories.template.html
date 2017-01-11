@@ -1,9 +1,15 @@
 <a ui-sref="home">Home</a> &lt;
 <a ui-sref="categories">Categories</a> &lt;
 
+<!--
 <ul>
   <li ng-repeat="item in cat.cats"
       ui-sref="items({itemId: item.short_name})">
     {{ item.id }} of {{ item.short_name }} {{ item.name }}
   </li>
 </ul>
+-->
+
+<categories
+  items="cat.cats">
+</categories>

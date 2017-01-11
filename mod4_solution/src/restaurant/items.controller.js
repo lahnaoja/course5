@@ -2,10 +2,10 @@
 'use strict';
 
 angular.module('MenuApp')
-.controller('ItemsComponentController', ItemsComponentController);
+.controller('ItemsController', ItemsController);
 
-ItemsComponentController.$inject = ['items', 'params'];
-function ItemsComponentController(items, params) {
+ItemsController.$inject = ['items', 'params'];
+function ItemsController(items, params) {
   var itemsCtrl = this;
   itemsCtrl.items = items.data.menu_items;
   itemsCtrl.short_name = params.itemId;
