@@ -1,0 +1,59 @@
+<div class="container">
+
+<h1>Signup for the newsletter</h1>
+<!-- {{infoCtrl.menuCategories}} -->
+<!-- pattern="(\d{3})-(\d{3})-(\d{4})" -->
+
+<fieldset>
+      <legend>Registration</legend>
+      <form name='regForm' novalidate>
+
+        <input type="text" name="firstname" placeholder="First Name"
+          ng-model="signupCtrl.user.firstname"
+          required
+          minlength="4"
+          ng-maxlength="10">
+          <br>
+        <input type="text" name="lastname" placeholder="Last Name"
+          ng-model="signupCtrl.user.lastname"
+          required
+          minlength="4"
+          ng-maxlength="10">
+          <br>
+        <input type="email" name="email" placeholder="Email"
+          ng-model="signupCtrl.user.email"
+          required>
+          <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+            Must be a valid email address: handle@domain format
+          </span>
+          <br>
+        <input type="text" name="phone" placeholder="Phone ##########"
+          ng-model="signupCtrl.user.phone">
+          <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+            Phone must be in the format ###-###-####.
+          </span>
+          <br>
+        <input type="text" name="favorite" placeholder="Favorite dish"
+          ng-model="signupCtrl.user.favorite"
+          required
+          minlength="1"
+          ng-maxlength="2">
+          <br>
+
+        <button
+          ng-disabled="regForm.$invalid"
+          ng-click="signupCtrl.submit()">Submit</button>
+
+          <div style="margin-top: 10px;">
+            Form valid? {{ regForm.$valid }}
+          </div>
+      </form>
+    </fieldset>
+
+    <div id="info" ng-if="signupCtrl.completed">
+      Username: {{ signupCtrl.user.username}} <br>
+      Email: {{ signupCtrl.user.email}} <br>
+      Phone: {{ signupCtrl.user.phone }}
+    </div>
+
+</div>
