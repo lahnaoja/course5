@@ -8,23 +8,22 @@ StorageService.$inject = ['$http', 'ApiPath'];
 function StorageService($http, ApiPath) {
   var service = this;
 
-  service.userData = {};
+  var userData = {};
 
   service.storeUserData = function(data) {
     //console.log(data);
 
-    service.userData.id = data.id;
-    service.userData.description = data.description;
-    service.userData.name = data.name;
-    service.userData.short_name = data.short_name;
+    userData.id = data.id;
+    userData.description = data.description;
+    userData.name = data.name;
+    userData.short_name = data.short_name;
 
     // https://lahnaoja-course5.herokuapp.com/images/L1.jpg
-    service.userData.image_url = ApiPath + '/images/' + data.short_name + '.jpg';
-    //console.log(service.userData);
+    userData.image_url = ApiPath + '/images/' + data.short_name + '.jpg';
   }
 
   service.getUserData = function() {
-    return service.userData;
+    return userData;
   }
 
 }
