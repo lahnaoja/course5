@@ -4,10 +4,13 @@
 angular.module('public')
 .controller('InfoController', InfoController);
 
-InfoController.$inject = ['menuCategories'];
-function InfoController(menuCategories) {
+InfoController.$inject = ['menuCategories', 'StorageService'];
+function InfoController(menuCategories, StorageService) {
   var $ctrl = this;
+
   $ctrl.menuCategories = menuCategories;
+
+  $ctrl.menuItem = StorageService.getUserData();
 }
 
 

@@ -184,7 +184,7 @@ h3.menu-item-title {
   }
 }
 
-/* My info ans Signup */
+/* My info and signup */
 
 fieldset {
   font-size: 16px;
@@ -201,4 +201,14 @@ fieldset {
 
 #info {
   margin-top: 20px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.save-info {
+  color: black;
+  font-weight: bold;
 }
