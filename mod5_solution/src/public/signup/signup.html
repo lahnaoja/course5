@@ -1,8 +1,6 @@
 <div class="container">
 
 <h1>Signup for the newsletter</h1>
-<!-- {{infoCtrl.menuCategories}} -->
-<!-- pattern="(\d{3})-(\d{3})-(\d{4})" -->
 
 <fieldset>
       <legend>Registration</legend>
@@ -40,7 +38,7 @@
           minlength="2"
           ng-maxlength="4">
           <span class="error" ng-if="signupCtrl.favoriteNotValid">
-            Favorite menu item code is not valid!
+            No such menu number exists
           </span>
           <br>
 
@@ -57,13 +55,5 @@
         -->
       </form>
     </fieldset>
-
-    <!--
-    <div id="info" ng-if="signupCtrl.completed">
-      First name: {{ signupCtrl.user.firstname}} <br>
-      Email: {{ signupCtrl.user.email}} <br>
-      Phone: {{ signupCtrl.user.phone }}
-    </div>
-    -->
 
 </div>

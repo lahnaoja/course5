@@ -12,15 +12,12 @@ function StorageService($http, ApiPath) {
 
   service.storeUserData = function(data) {
     service.userData = data;
-
     // https://lahnaoja-course5.herokuapp.com/images/L1.jpg
     service.userData.image_url = ApiPath + '/images/' + data.short_name + '.jpg';
-    console.log(service.userData);
+    //console.log(service.userData);
   }
 
   service.getUserData = function() {
-    console.log("GET ... ");
-    console.log(service.userData);
     return service.userData;
   }
 

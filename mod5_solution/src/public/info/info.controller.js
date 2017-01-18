@@ -9,8 +9,9 @@ function InfoController(menuCategories, StorageService) {
   var $ctrl = this;
 
   $ctrl.menuCategories = menuCategories;
-
   $ctrl.menuItem = StorageService.getUserData();
+
+  $ctrl.menuItemMissing = ($ctrl.menuItem.short_name == undefined);
 }
 
 

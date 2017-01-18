@@ -3,11 +3,10 @@
 
 <h1>My Info</h1>
 <!-- {{infoCtrl.menuCategories}} -->
-
 <!-- {{infoCtrl.menuItem}} -->
 
 <div class="row">
-  <div class="col-sm-5">
+  <div class="col-sm-3">
     <!-- <div class="menu-item-photo"> -->
     <div>
       <div>{{infoCtrl.menuItem.short_name}}</div>
@@ -15,16 +14,17 @@
     </div>
   </div>
   <!-- <div class="menu-item-description col-sm-7"> -->
-  <div>
+  <div class="col-sm-3>
     <h3 class="menu-item-title">{{infoCtrl.menuItem.name}}</h3>
     <p class="menu-item-details">{{infoCtrl.menuItem.description}}</p>
   </div>
 </div>
 
-<div id="info" ng-if="reg.completed">
-  Username: {{ reg.user.username}} <br>
-  Email: {{ reg.user.email}} <br>
-  Phone: {{ reg.user.phone }}
+<div class="save-info" ng-if="infoCtrl.menuItemMissing">
+  Not Signed Up Yet...
+  <a class="save-info" ui-sref="public.signup">
+    Sign up Now!
+  </a>
 </div>
 
 </div>
