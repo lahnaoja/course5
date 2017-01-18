@@ -11,7 +11,13 @@ function StorageService($http, ApiPath) {
   service.userData = {};
 
   service.storeUserData = function(data) {
-    service.userData = data;
+    //console.log(data);
+
+    service.userData.id = data.id;
+    service.userData.description = data.description;
+    service.userData.name = data.name;
+    service.userData.short_name = data.short_name;
+
     // https://lahnaoja-course5.herokuapp.com/images/L1.jpg
     service.userData.image_url = ApiPath + '/images/' + data.short_name + '.jpg';
     //console.log(service.userData);
